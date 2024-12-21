@@ -31,3 +31,7 @@ Read me:
 - now can create views and path in 
   - views.py &
   - urls.py
+
+- create super user in admin panel:
+  - python manage.py createsuperuser
+
