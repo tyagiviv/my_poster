@@ -1,0 +1,35 @@
+<!-- details/templates/details/poster_details.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ poster.name|default:"Poster Not Found" }}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .poster-container {
+            text-align: center;
+            max-width: 600px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        {% if poster %}
+            <img src="{{ poster.url }}" alt="Poster">
+            <h1>{{ poster.name }}</h1>
+            <h3>Director: {{ poster.director_name }}</h3>
+            <p>{{ poster.description }}</p>
+        {% else %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

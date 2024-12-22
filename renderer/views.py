@@ -16,6 +16,6 @@ class Top(ListView):
     context_object_name = 'posters'
 
     def get_queryset(self):
-        size = self.request.GET.get('size', 3)
+        size = self.request.GET.get('size', 5)
         return Poster.objects.all().order_by('-id')[:int(size)]
 

@@ -27,7 +27,9 @@
     <div>
         {% for poster in posters %}
             <div class="poster">
+            <a href="{% url 'poster_details' poster.id %}">
                 <img src="{{ poster.url }}" alt="Poster">
+            </a>
             </div>
         {% endfor %}
     </div>
