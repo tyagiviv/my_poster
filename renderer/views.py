@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from .models import Poster
+from .models import Poster, Favorite
 from django.views.generic import ListView
 
 
 # Create your views here.
 def favorite(request):
-    poster = Poster.objects.last()
-    return render(
-        request, 'favorite.html', {'poster': poster})
+    # poster = Poster.objects.last()
+    favorite_posters = Poster.objects.filter(id__in=Favorite.objects.values('poster_id'))
+    return render(request, 'favorite.html', {'posters': favorite_posters})
+#    return render(
+#        request, 'favorite.html', {'poster': poster})
 
 
 class Top(ListView):

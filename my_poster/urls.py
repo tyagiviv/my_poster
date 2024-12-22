@@ -21,7 +21,7 @@ from renderer.views import favorite, Top
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('favorite/', favorite),
+    path('favorite/', favorite, name='favorite'),
     path('top/', Top.as_view()),
     path('poster_details/<int:id>/', views.poster_details, name='poster_details'),
 ]

@@ -18,6 +18,20 @@
             max-width: 100%;
             height: auto;
         }
+        .add-to-fav-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-to-fav-btn.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+
     </style>
 </head>
 <body>
@@ -27,6 +41,17 @@
             <h1>{{ poster.name }}</h1>
             <h3>Director: {{ poster.director_name }}</h3>
             <p>{{ poster.description }}</p>
+
+            {% if is_favorite %}
+                <button class="add-to-fav-btn disabled" disabled>Added to Favorites</button>
+
+            {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="add-to-fav-btn" type="submit">Add to Favorites</button>
+                </form>
+            {% endif %}
+
         {% else %}
             <p class="message">{{ message }}</p>
         {% endif %}

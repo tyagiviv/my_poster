@@ -18,7 +18,6 @@ class Poster(models.Model):
 
 
 class Favorite(models.Model):
-
     poster_id = models.ForeignKey(Poster, on_delete=models.CASCADE, related_name="favorites")
 
     def __str__(self):

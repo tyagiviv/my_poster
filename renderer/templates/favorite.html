@@ -13,24 +13,60 @@
             height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .poster-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow posters to wrap onto the next line */
+            justify-content: flex-start; /* Center the posters */
+            gap: 20px; /* Add space between posters */
+            width: 100%; /* Ensure the container doesn't exceed screen width */
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .poster {
+            flex-basis: 200px; /* Control the base size of each poster */
+            flex-shrink: 0; /* Prevent shrinking */
+            flex-grow: 0; /* Allow posters to grow and fill available space */
+            height: 300px; /* Adjust the height of each poster */
+            overflow: hidden;
         }
 
         img {
-            width: 400px;
-            height: 600px;
+            width: 100%; /* Ensure the image takes up the full width */
+            height: 100%; /* Ensure the image takes up the full height */
             object-fit: cover; /* Ensures the image covers the specified dimensions */
         }
     </style>
 
 </head>
 <body>
+    <div>
 
-    {% if poster %}
-        <img src="{{ poster.url }}" alt="Favorite Poster">
+    <h1>Favorite Posters</h1>
+    </div>
 
-    {% else %}
-        <p>No poster available.</p>
-    {% endif %}
+    <p>Total Posters: {{ posters|length }}</p>
+
+    <div class="poster-container">
+        {% for poster in posters %}
+            <div class="poster">
+                <a href="{% url 'poster_details' poster.id %}">
+                    <img src="{{ poster.url }}" alt="Favorite Poster">
+                </a>
+            </div>
+        {% empty %}
+            <p>No favorite posters found.</p>
+        {% endfor %}
+    </div>
 
 
 
