@@ -26,7 +26,15 @@
             border: none;
             cursor: pointer;
         }
-        .add-to-fav-btn.disabled {
+        .remove-from-fav-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4682b4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
@@ -36,6 +44,7 @@
 </head>
 <body>
     <div class="poster-container">
+
         {% if poster %}
             <img src="{{ poster.url }}" alt="Poster">
             <h1>{{ poster.name }}</h1>
@@ -43,9 +52,13 @@
             <p>{{ poster.description }}</p>
 
             {% if is_favorite %}
-                <button class="add-to-fav-btn disabled" disabled>Added to Favorites</button>
 
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="remove-from-fav-btn" type="submit">Remove from Favorites</button>
+                </form>
             {% else %}
+
                 <form method="POST">
                     {% csrf_token %}
                     <button class="add-to-fav-btn" type="submit">Add to Favorites</button>
@@ -53,6 +66,7 @@
             {% endif %}
 
         {% else %}
+
             <p class="message">{{ message }}</p>
         {% endif %}
     </div>
